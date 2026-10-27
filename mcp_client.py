@@ -31,3 +31,24 @@ async def main():
             "GITHUB_READ_ONLY": "1",
         },
     )
+    
+    async with stdio_client(server_params) as (read,write):
+        async with ClientSession(read,write) as session:
+            await session.initialize()
+            
+            print("Connected to Github MCP server.")
+            
+            result = await session.list_tools()
+            
+            print(f"\nAvaiable tools : {len(result.tools)}")
+            
+            for tool in result.tools:
+                print(f"Name:{tool.name}")
+                print(f"Description:{tool.description}")
+                print(f"Input Schema:{tool.input_schema}")
+                print("-"*40)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+                
+    
