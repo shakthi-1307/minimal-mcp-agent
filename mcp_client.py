@@ -47,7 +47,25 @@ async def main():
                 print(f"Description:{tool.description}")
                 print(f"Input Schema:{tool.input_schema}")
                 print("-"*40)
-
+                
+                
+            tool_result = await session.call_tool(
+                "search_repositories",
+                arguments = {
+                    "query":"model context protocol language:Python",
+                    "perPage":5,
+                },
+            )
+            
+            if tool_result.is_error:
+                print("Tool Execution failed.")
+            else:
+                print("Tool Execution Succeeded.")
+                
+            for item in tool_result.content:
+                if hasattr(item,"text"):
+                    print(item.text)
+                    
 if __name__ == "__main__":
     asyncio.run(main())
                 
