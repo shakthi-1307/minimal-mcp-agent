@@ -1,0 +1,6 @@
+groq
+python-dotenv
+httpx
+mcp[cli]
+pydantic
+pytest
