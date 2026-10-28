@@ -145,6 +145,7 @@ async def main():
                             "Never invent tool results. "
                             "The tools are read-only. "
                             "If a tool fails, explain the failure."
+                            "Do not make your own answers striclty."
                         ),
                     },
                     {"role":"user","content":question}
@@ -191,6 +192,9 @@ async def main():
                                     name,
                                     arguments=arguments
                                 )
+                                print("\n--- RAW MCP TOOL RESULT ---")
+                                print(result)
+                                print("--- END MCP TOOL RESULT ---\n")
                                 
                                 result_text = json.dumps(
                                     [
